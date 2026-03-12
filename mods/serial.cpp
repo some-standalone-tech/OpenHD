@@ -1,5 +1,5 @@
 // Serial.cpp
-#include "serial.hpp"
+#include "serial.h"
 #include <fcntl.h>
 #include <unistd.h>
 #include <cstring>
