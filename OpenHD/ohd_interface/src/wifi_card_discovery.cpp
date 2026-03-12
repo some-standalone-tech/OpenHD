@@ -383,6 +383,7 @@ void DWifiCards::main_discover_an_process_wifi_cards(
   const auto m_platform = OHDPlatform::instance();
   const std::string blue = "\033[34m";
   const std::string reset = "\033[0m";
+  std::cout << blue << "Custom user detected" << reset << std::endl;
   std::cout << blue << "Waiting for wifi card(s)..." << reset << std::endl;
   const bool debug = false;
   if (config.WIFI_MONITOR_CARD_EMULATE) {

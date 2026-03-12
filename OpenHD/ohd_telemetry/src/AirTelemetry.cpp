@@ -165,6 +165,7 @@ void AirTelemetry::loop_infinite(bool& terminate,
       // send out in X second intervals
       std::this_thread::sleep_for(loop_intervall);
     }
+    std::cout << "Test debug message" << std::endl;
   }
 }
 
