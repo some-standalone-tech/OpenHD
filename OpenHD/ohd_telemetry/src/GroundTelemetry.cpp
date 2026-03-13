@@ -31,8 +31,6 @@
 #include "openhd_util.h"
 #include "openhd_util_time.h"
 
-#include "mods/serial/serial.h"
-
 GroundTelemetry::GroundTelemetry() : MavlinkSystem(OHD_SYS_ID_GROUND) {
   m_console = openhd::log::create_or_get("ground_tele");
   assert(m_console);
@@ -383,6 +381,17 @@ std::vector<openhd::Setting> GroundTelemetry::get_all_settings() {
 
 void GroundTelemetry::setup_uart() {
   std::cout << "UART SETUP" << std::endl;
+  m_walksnail_serial = Serial("/dev/tty0", 115200);
+  if (!m_walksnail_serial.open())
+  {
+    std::cout << "Failed to open Walksnail uart!"
+  }
+  else
+  {
+    std::cout << "Walksnail uart opened successfully!"
+  }
+
+  std::cout << "UART SETUP FINISHED" << std::endl;
   assert(m_gnd_settings);
   using namespace openhd::telemetry;
   const auto uart_linux_fd = serial_openhd_param_to_linux_fd(
