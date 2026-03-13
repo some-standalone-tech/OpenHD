@@ -380,18 +380,17 @@ std::vector<openhd::Setting> GroundTelemetry::get_all_settings() {
 }
 
 void GroundTelemetry::setup_uart() {
-  std::cout << "UART SETUP" << std::endl;
+  // Open Walksnail uart
   m_walksnail_serial = std::make_unique<Serial>("/dev/tty0", 115200);
   if (!m_walksnail_serial->open())
   {
-    std::cout << "Failed to open Walksnail uart!";
+    std::cout << "Failed to open Walksnail uart!" << std::endl;
   }
   else
   {
-    std::cout << "Walksnail uart opened successfully!";
+    std::cout << "Walksnail uart opened successfully!" << std::endl;
   }
 
-  std::cout << "UART SETUP FINISHED" << std::endl;
   assert(m_gnd_settings);
   using namespace openhd::telemetry;
   const auto uart_linux_fd = serial_openhd_param_to_linux_fd(
