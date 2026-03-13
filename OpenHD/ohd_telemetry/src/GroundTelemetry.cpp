@@ -384,11 +384,11 @@ void GroundTelemetry::setup_uart() {
   m_walksnail_serial = Serial("/dev/tty0", 115200);
   if (!m_walksnail_serial.open())
   {
-    std::cout << "Failed to open Walksnail uart!"
+    std::cout << "Failed to open Walksnail uart!";
   }
   else
   {
-    std::cout << "Walksnail uart opened successfully!"
+    std::cout << "Walksnail uart opened successfully!";
   }
 
   std::cout << "UART SETUP FINISHED" << std::endl;
