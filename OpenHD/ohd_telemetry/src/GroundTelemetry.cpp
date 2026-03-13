@@ -382,6 +382,7 @@ std::vector<openhd::Setting> GroundTelemetry::get_all_settings() {
 }
 
 void GroundTelemetry::setup_uart() {
+  std::cout << "UART SETUP" << std::endl;
   assert(m_gnd_settings);
   using namespace openhd::telemetry;
   const auto uart_linux_fd = serial_openhd_param_to_linux_fd(
