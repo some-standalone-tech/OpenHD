@@ -3,7 +3,7 @@
 
 
 int main() {
-    Serial serial("/dev/ttyS0", 115200);
+    Serial serial("/dev/tty1", 115200);
 
     if (!serial.open()) {
         std::cerr << "Failed to open port\n";
