@@ -381,8 +381,8 @@ std::vector<openhd::Setting> GroundTelemetry::get_all_settings() {
 
 void GroundTelemetry::setup_uart() {
   std::cout << "UART SETUP" << std::endl;
-  m_walksnail_serial = Serial("/dev/tty0", 115200);
-  if (!m_walksnail_serial.open())
+  m_walksnail_serial = std::make_unique<Serial>("/dev/tty0", 115200);
+  if (!m_walksnail_serial->open())
   {
     std::cout << "Failed to open Walksnail uart!";
   }

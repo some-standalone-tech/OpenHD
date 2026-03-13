@@ -123,8 +123,7 @@ class GroundTelemetry : public MavlinkSystem {
 #ifdef OPENHD_TELEMETRY_SDL_FOR_JOYSTICK_FOUND
   std::unique_ptr<RcJoystickSender> m_rc_joystick_sender = nullptr;
 #endif
-
-  Serial m_walksnail_serial;
+  std::unique_ptr<Serial> m_walksnail_serial = nullptr;
 };
 
 #endif  // OPENHD_TELEMETRY_GROUNDTELEMETRY_H
