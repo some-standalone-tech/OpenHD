@@ -11,7 +11,7 @@ int main() {
     }
 
     while (true) {
-        std::string line = serial.readLine();
+        std::string line = serial.readline();
         std::cout << "Got: " << line << "\n";
     }
 }

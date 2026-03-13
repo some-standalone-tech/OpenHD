@@ -23,7 +23,7 @@ bool Serial::open()
     termios tty{};
     tcgetattr(m_fd, &tty);
 
-    speed_t spd = toSpeed(m_baud);
+    speed_t spd = setBaudrate(m_baud);
     cfsetispeed(&tty, spd);
     cfsetospeed(&tty, spd);
 
