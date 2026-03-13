@@ -394,7 +394,7 @@ void GroundTelemetry::setup_uart() {
   // TEST - SHOULD BE REMOVED
   while (true)
   {
-    std::string line = serial.readline();
+    std::string line = m_walksnail_serial->readline();
     std::cout << "Got: " << line << "\n";
   }
 
