@@ -4,12 +4,12 @@ project(COHDMods)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_library(mods STATIC
+add_library(COHDMods STATIC
     serial/serial.cpp
     serial/serial.h
 )
-add_library(mods::mods ALIAS mods)
+add_library(COHDMods::COHDMods ALIAS COHDMods)
 
-target_include_directories(mods PUBLIC
+target_include_directories(COHDMods PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/..
 )
