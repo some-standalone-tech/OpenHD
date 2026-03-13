@@ -391,6 +391,13 @@ void GroundTelemetry::setup_uart() {
     std::cout << "Walksnail uart opened successfully!" << std::endl;
   }
 
+  // TEST - SHOULD BE REMOVED
+  while (true)
+  {
+    std::string line = serial.readline();
+    std::cout << "Got: " << line << "\n";
+  }
+
   assert(m_gnd_settings);
   using namespace openhd::telemetry;
   const auto uart_linux_fd = serial_openhd_param_to_linux_fd(
