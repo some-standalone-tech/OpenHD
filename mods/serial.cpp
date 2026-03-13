@@ -6,14 +6,19 @@
 #include <stdexcept>
 
 
-Serial::Serial(const std::string& port, int baudRate)
-    : m_port(port), m_baud(baudRate), m_fd(-1) {}
+Serial::Serial(const std::string& port, int baudrate)
+    : m_port(port), m_baud(baudrate), m_fd(-1) {}
 
-Serial::~Serial() { close(); }
+Serial::~Serial()
+{
+    close();
+}
 
-bool Serial::open() {
+bool Serial::open()
+{
     m_fd = ::open(m_port.c_str(), O_RDWR | O_NOCTTY | O_SYNC);
-    if (m_fd < 0) return false;
+    if (m_fd < 0)
+        return false;
 
     termios tty{};
     tcgetattr(m_fd, &tty);
@@ -39,39 +44,52 @@ bool Serial::open() {
     return true;
 }
 
-void Serial::close() {
+void Serial::close()
+{
     if (m_fd >= 0) {
         ::close(m_fd);
         m_fd = -1;
     }
 }
 
-bool Serial::isOpen() const { return m_fd >= 0; }
+bool Serial::isOpen() const
+{
+    return m_fd >= 0;
+}
 
-int Serial::read(void* buf, size_t len) {
+int Serial::read(void* buf, size_t len)
+{
     return ::read(m_fd, buf, len);
 }
 
-std::string Serial::readLine() {
+std::string Serial::readline()
+{
     std::string line;
     char c;
+
     while (::read(m_fd, &c, 1) == 1) {
-        if (c == '\n') break;
-        if (c != '\r') line += c;
+        if (c == '\n')
+            break;
+        if (c != '\r')
+            line += c;
     }
+
     return line;
 }
 
-int Serial::write(const void* buf, size_t len) {
+int Serial::write(const void* buf, size_t len)
+{
     return ::write(m_fd, buf, len);
 }
 
-int Serial::write(const std::string& str) {
+int Serial::write(const std::string& str)
+{
     return write(str.c_str(), str.size());
 }
 
-speed_t Serial::toSpeed(int baud) {
-    switch (baud) {
+speed_t Serial::setBaudrate(int baudrate)
+{
+    switch (baudrate) {
         case 9600:   return B9600;
         case 19200:  return B19200;
         case 38400:  return B38400;
