@@ -11,7 +11,10 @@
 class WalksnailBridge
 {
 public:
-    void setup_bridge();
+    void WalksnailBridge::setup_bridge(
+        uint8_t sys_id,
+        std::vector<std::shared_ptr<MavlinkComponent>> &mavlink_components
+    );
     void stop_bridge();
 private:
     void reading_loop();
