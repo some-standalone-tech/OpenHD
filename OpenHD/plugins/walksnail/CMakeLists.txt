@@ -15,6 +15,8 @@ add_library(OHDPluginWalksnail STATIC
 
 target_include_directories(OHDPluginWalksnail PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_SOURCE_DIR}/OpenHD/ohd_telemetry/src
+    ${CMAKE_SOURCE_DIR}/OpenHD/ohd_telemetry/src/routing
 )
 
 target_link_libraries(OHDPlugins INTERFACE OHDPluginWalksnail)
