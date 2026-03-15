@@ -4,6 +4,7 @@
 #include <thread>
 #include <mutex>
 #include <atomic>
+#include <vector>
 
 #define WALKSNAIL_DEFAULT_UART      "/tmp/ttyV0"
 #define WALKSNAIL_DEFAULT_BAUDRATE  115200
@@ -11,7 +12,7 @@
 class WalksnailBridge
 {
 public:
-    void WalksnailBridge::setup_bridge(
+    void setup_bridge(
         uint8_t sys_id,
         std::vector<std::shared_ptr<MavlinkComponent>> &mavlink_components
     );
