@@ -3,7 +3,8 @@
 
 class WalksnailMavlinkComponent : public MavlinkComponent
 {
-    WalksnailMavlinkComponent(uint8_t sys_id, uint8_t comp_id);
+public:
+    WalksnailMavlinkComponent(uint8_t sys_id);
 
     std::vector<MavlinkMessage> process_mavlink_messages(
         std::vector<MavlinkMessage> messages

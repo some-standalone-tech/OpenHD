@@ -2,8 +2,7 @@
 
 
 WalksnailMavlinkComponent::WalksnailMavlinkComponent(
-    uint8_t sys_id,
-    uint8_t comp_id
+    uint8_t sys_id
 ) : MavlinkComponent(sys_id, MAV_COMP_ID_ONBOARD_COMPUTER)
 {
 }
