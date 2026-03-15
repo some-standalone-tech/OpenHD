@@ -2,8 +2,15 @@
 #include <iostream>
 #include <chrono>
 
-void WalksnailBridge::setup_bridge()
+void WalksnailBridge::setup_bridge(
+    uint8_t sys_id,
+    std::vector<std::shared_ptr<MavlinkComponent>> &mavlink_components
+)
 {
+    m_walksnail_component = std::make_shared<WalksnailMavlinkComponent>(sys_id);
+    mavlink_components.push_back(m_walksnail_component);
+
+    // Create and run reading loop for Walksnail serial
     m_walksnail_serial = std::make_unique<Serial>(
         WALKSNAIL_DEFAULT_UART,
         WALKSNAIL_DEFAULT_BAUDRATE

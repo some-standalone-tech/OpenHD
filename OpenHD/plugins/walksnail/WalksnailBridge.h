@@ -1,4 +1,5 @@
 #include "serial/serial.h"
+#include "WalksnailMavlinkComponent.h"
 #include <memory>
 #include <thread>
 #include <mutex>
@@ -19,4 +20,6 @@ private:
     std::mutex m_receive_thread_mutex;
     std::unique_ptr<std::thread> m_receive_thread = nullptr;
     std::atomic<bool> m_stop_requested = false;
+
+    std::shared_ptr<WalksnailMavlinkComponent> m_walksnail_component;
 };
