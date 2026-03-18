@@ -33,7 +33,7 @@ static std::vector<MavlinkMessage> pack_walksnail_data_to_mavlink(
 
         MavlinkMessage wrapped;
         wrapped.m = msg;
-        wrapped.recommended_n_injections = 2; // lossy link, send twice
+        wrapped.recommended_n_injections = 4; // lossy link, send twice
         ret.push_back(wrapped);
 
         offset += chunk;
