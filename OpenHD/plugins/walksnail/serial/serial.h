@@ -2,6 +2,7 @@
 #include <string>
 #include <termios.h>
 #include <vector>
+#include <cstdint>
 
 
 class Serial {
