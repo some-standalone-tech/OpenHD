@@ -97,7 +97,7 @@ int Serial::getAvailable()
 
 std::vector<uint8_t> Serial::readAvailable()
 {
-    int available = get_available();
+    int available = getAvailable();
     std::vector<uint8_t> result(available);
     ::read(m_fd, result.data(), available);
     return result;
