@@ -16,6 +16,8 @@ public:
     std::string readline();
     int         write(const void* buf, size_t len);
     int         write(const std::string& str);
+    int         getAvailable();
+    std::vector<uint8_t> readAvailable();
 
 private:
     std::string m_port;

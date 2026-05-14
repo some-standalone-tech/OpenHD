@@ -88,6 +88,21 @@ int Serial::write(const std::string& str)
     return write(str.c_str(), str.size());
 }
 
+int Serial::getAvailable()
+{
+    int available = 0;
+    ioctl(m_fd, FIONREAD, &available);
+    return available;
+}
+
+std::vector<uint8_t> Serial::readAvailable()
+{
+    int available = get_available();
+    std::vector<uint8_t> result(available);
+    ::read(m_fd, result.data(), available);
+    return result;
+}
+
 speed_t Serial::setBaudrate(int baudrate)
 {
     switch (baudrate) {

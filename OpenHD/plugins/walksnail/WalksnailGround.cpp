@@ -49,16 +49,13 @@ void WalksnailGround::reading_loop()
 {
     while (!m_stop_requested)
     {
-        std::string packet = m_walksnail_serial->readline();
+        std::vector<uint8_t> packet = m_walksnail_serial->readAvailable();
         if (packet.empty())
             continue;
 
-        // Restore delimiter removed by readline
-        packet.push_back('\r');
-        packet.push_back('\n');
-
         std::lock_guard<std::mutex> lock(m_callback_mutex);
-        if (!m_callback) return;
+        if (!m_callback)
+            return;
 
         // Print packets as hex
         std::cout << std::hex << std::setfill('0');
@@ -68,7 +65,7 @@ void WalksnailGround::reading_loop()
         std::cout << std::endl;
 
         auto messages = pack_walksnail_data_to_mavlink(
-            reinterpret_cast<const uint8_t*>(packet.data()), packet.size(),
+            packet.data(), packet.size(),
             m_src_sys_id,
             m_target_sys_id
         );
