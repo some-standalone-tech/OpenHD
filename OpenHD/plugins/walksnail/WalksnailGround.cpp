@@ -53,6 +53,10 @@ void WalksnailGround::reading_loop()
         if (packet.empty())
             continue;
 
+        // Restore delimiter removed by readline
+        packet.push_back('\r');
+        packet.push_back('\n');
+
         std::lock_guard<std::mutex> lock(m_callback_mutex);
         if (!m_callback)
             return;
