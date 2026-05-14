@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <termios.h>
+#include <vector>
 
 
 class Serial {
@@ -18,7 +19,7 @@ public:
     int         write(const std::string& str);
     int         getAvailable();
     std::vector<uint8_t> readAvailable();
-
+z
 private:
     std::string m_port;
     int         m_baud;
