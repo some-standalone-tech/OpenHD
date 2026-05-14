@@ -49,7 +49,7 @@ void WalksnailGround::reading_loop()
 {
     while (!m_stop_requested)
     {
-        std::vector<uint8_t> packet = m_walksnail_serial->readAvailable();
+        std::string packet = m_walksnail_serial->readline();
         if (packet.empty())
             continue;
 
@@ -65,7 +65,7 @@ void WalksnailGround::reading_loop()
         std::cout << std::endl;
 
         auto messages = pack_walksnail_data_to_mavlink(
-            packet.data(), packet.size(),
+            reinterpret_cast<const uint8_t*>(packet.data()), packet.size(),
             m_src_sys_id,
             m_target_sys_id
         );
