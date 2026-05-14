@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <cstring>
 #include <stdexcept>
+#include <sys/ioctl.h>
 
 
 Serial::Serial(const std::string& port, int baudrate)
