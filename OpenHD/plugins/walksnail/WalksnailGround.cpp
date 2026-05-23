@@ -31,6 +31,20 @@ void WalksnailGround::setup_bridge(uint8_t src_sys_id, uint8_t target_sys_id)
     );
 }
 
+void WalksnailGround::process_air_messages(std::vector<MavlinkMessage> messages)
+{
+    for (const auto& msg : messages) {
+        if (msg.m.msgid == MAVLINK_MSG_ID_TUNNEL) {
+            mavlink_tunnel_t tunnel;
+            mavlink_msg_tunnel_decode(&msg.m, &tunnel);
+
+            if (m_walksnail_serial->isOpen()) {
+                m_walksnail_serial->write(tunnel.payload, tunnel.payload_length);
+            }
+        }
+    }
+}
+
 void WalksnailGround::reading_loop()
 {
     while (!m_stop_requested)
@@ -45,6 +59,13 @@ void WalksnailGround::reading_loop()
 
         std::lock_guard<std::mutex> lock(m_callback_mutex);
         if (!m_callback) return;
+
+        // Print packets as hex
+        std::cout << std::hex << std::setfill('0');
+        for (unsigned char c : packet) {
+            std::cout << "0x" << std::setw(2) << (int)c << " ";
+        }
+        std::cout << std::endl;
 
         auto messages = pack_walksnail_data_to_mavlink(
             reinterpret_cast<const uint8_t*>(packet.data()), packet.size(),

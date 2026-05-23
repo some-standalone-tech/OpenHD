@@ -31,6 +31,9 @@
 #include "openhd_util.h"
 #include "openhd_util_time.h"
 
+#include <iostream>
+#include <iomanip>
+
 AirTelemetry::AirTelemetry() : MavlinkSystem(OHD_SYS_ID_AIR) {
   m_console = openhd::log::create_or_get("air_tele");
   assert(m_console);
@@ -312,5 +315,10 @@ void AirTelemetry::set_link_handle(std::shared_ptr<OHDLink> link) {
 void AirTelemetry::setup_walksnail_air()
 {
   m_walksnail_air = std::make_unique<WalksnailAir>();
-  m_walksnail_air->setup_bridge();
+  m_walksnail_air->register_callback(
+    [this](std::vector<MavlinkMessage> messages) {
+      send_messages_ground_unit(messages);
+    }
+  );
+  m_walksnail_air->setup_bridge(_sys_id, OHD_SYS_ID_FC);
 }
